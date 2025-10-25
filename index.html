@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riders Club</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Local Tailwind (offline). The helper script will download a proper tailwind.min.css into /vendor -->
+  <link rel="stylesheet" href="vendor/tailwind.min.css">
+  <script>/* Feather/Fallback loader */</script>
+  <script src="vendor/feather.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100" style="background-image: url(bg.png);">
+  <!-- Blurred background overlay -->
+  <div class="fixed inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 z-0"></div>
+
+  <!-- Main content -->
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
+        <h1 class="text-3xl font-bold text-center">🎓 ClubZen Student Management</h1>
+        <p class="text-center text-indigo-100 mt-2">Manage your student club members with ease</p>
+      </div>
+
+      <div class="p-6">
+        <form id="studentForm" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">First Name</label>
+              <input type="text" id="prenom" placeholder="John" required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Last Name</label>
+              <input type="text" id="nom" placeholder="Doe" required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Student ID</label>
+              <input type="text" id="matricule" placeholder="STU12345" required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="email" placeholder="john@example.com" required
+                class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">Address</label>
+            <input type="text" id="adresse" placeholder="123 University Ave" required
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input type="text" id="telephone" placeholder="+1 (555) 123-4567" required
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+          </div>
+
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">Profile Photo</label>
+            <div class="flex items-center space-x-4">
+              <label class="cursor-pointer">
+                <span class="inline-flex items-center px-4 py-2 bg-indigo-100 border border-transparent rounded-lg font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
+                  <i data-feather="upload" class="w-4 h-4 mr-2"></i> Choose File
+                  <input type="file" id="photo" accept="image/*" class="hidden">
+                </span>
+              </label>
+              <img id="photoPreview" class="w-12 h-12 rounded-full object-cover border-2 border-indigo-200 hidden" alt="Preview" />
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <i data-feather="save" class="w-4 h-4 inline mr-2"></i> Save Student
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div class="relative flex-1">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i data-feather="search" class="text-gray-400"></i>
+              </div>
+              <input type="text" id="search" placeholder="Search students..."
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            </div>
+            <button id="exportExcel" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition">
+              <i data-feather="download" class="w-4 h-4 mr-2"></i> Export to Excel
+            </button>
+          </div>
+
+          <div id="studentList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local SheetJS for Excel export (the helper script will download a full copy to vendor/) -->
+  <script src="vendor/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    if (window.feather) feather.replace();
+  </script>
+</body>
+</html>

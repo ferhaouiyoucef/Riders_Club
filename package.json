@@ -1,0 +1,19 @@
+{
+  "name": "riders-club",
+  "productName": "Riders Club",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "prepare-offline": "node ./scripts/prepare_offline.js",
+    "pack": "electron-packager . \"Riders Club\" --out=dist --overwrite --icon=assets/icon_512.png",
+    "build-all": "npm run prepare-offline && npm run pack",
+    "dist": "electron-builder --publish never"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^26.0.0",
+    "electron-packager": "^16.0.0"
+  }
+}
